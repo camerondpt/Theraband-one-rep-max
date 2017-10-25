@@ -69,6 +69,11 @@
       var black = (3.223 + (0.0587 * deform * 100));
       var silver = (4.053 + (0.0856 * deform * 100));
       var gold = (6.882 + (0.135 * deform * 100));
+      if (deform > 2.5) {
+    	alert("Calculations invalid over 250% deformation")
+      } else if (deform < 1) {
+    	alert ("Reliability poor with less than 100% deformation")
+      }
       if (color == 1) {
         $("input#force").val(Math.round(yellow*10) / 10);
         $("input#oneRepMaxLa").val(Math.round(100 * yellow / (101.3 - 2.67123 * reps)));
