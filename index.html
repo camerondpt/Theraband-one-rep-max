@@ -25,32 +25,33 @@
       <option value='6'>Silver</option>
       <option value='7'>Gold</option>
     </select>
-    <br>
-    <br>
+      <br>
+      <br>
     <input type="number" id="restingLength" min="0" inputmode="numeric" pattern="[0-9]*" title="Non-negative integral number"> Resting Length (in)<br>
     <input type="number" id="excursion" min="0" inputmode="numeric" pattern="[0-9]*" title="Non-negative integral number"> Excursion (in)<br>
     <input type="number" id="reps" min="0" inputmode="numeric" pattern="[0-9]*" title="Non-negative integral number" value="1"> Repetitions<br>
   </form>
-  <br>
-  <br>
+    <br>
+    <br>
   <button id="calculate">Calculate</button>
   <button id="Reset" class="green">Reset</button>
-  <br>
-  <br>
+    <br>
+    <br>
   <form class="Form">
-    1RM = <input type="text" id="oneRepMaxLa"> (Landers)<br>
-    1RM = <input type="text" id="oneRepMaxOc"> (O'Connor)<br>
+    Force = <input type="text" id="force"> pounds<br>
+    Est. 1RM = <input type="text" id="oneRepMaxLa"> (Landers)<br>
+    Est. 1RM = <input type="text" id="oneRepMaxOc"> (O'Connor)<br>
   </form>
-  <br>
-  <br>
+    <br>
+    <br>
   <form>
     <input type="range" min="0" max="100" value="80" step="5" onchange="rangevalue.value=value" id="percentSlider"/>
     <output id="rangevalue">80</output>% 1RM
   </form>
-  <br>
+    <br>
   <form class="Form">
     <input type="text" id="oneRepMaxPercentLa"> = %1RM (Landers)
-    <br>
+      <br>
     <input type="text" id="oneRepMaxPercentOc"> = %1RM (O'Connor)
   </form>
 
