@@ -109,7 +109,10 @@ button {
 }
 
 select {
-  width: 120px;
+  margin: auto;
+  display: block;
+  text-align: center;
+  width: 90px;
   border: none;
   border-bottom: 1px solid black;
   padding: 3px 10px;
