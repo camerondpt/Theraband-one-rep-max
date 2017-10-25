@@ -16,64 +16,95 @@
   </head>
   <body>
     <form method="post" class="Form">
-      <select name='Colors'>
-        <option value='1'>Yellow</option>
-        <option value='2'>Green</option>
-        <option value='3'>Red</option>
-        <option value='4'>Blue</option>
-        <option value='5'>Black</option>
-        <option value='6'>Silver</option>
-        <option value='7'>Gold</option>
-      </select>
-      <br>
-      <br>
-      <input type="number" id="restingLength" min="0" inputmode="numeric" pattern="[0-9]*" title="Non-negative integral number"> Resting Length (in)<br>
-      <input type="number" id="excursion" min="0" inputmode="numeric" pattern="[0-9]*" title="Non-negative integral number"> Excursion (in)<br>
-      <input type="number" id="reps" min="0" inputmode="numeric" pattern="[0-9]*" title="Non-negative integral number" value="1"> Repetitions<br>
-    </form>
-    <br><br>
-      <button id="calculate">Calculate</button>
-      <button id="Reset" class="green">Reset</button>
-      <br>
-      <br>
-    <form class="Form">
-      1RM = <input type="text" id="oneRepMaxLa"> (Landers)<br>
-      1RM = <input type="text" id="oneRepMaxOc"> (O'Connor)<br>
-    </form>
-      <br>
-      <br>
-    <form>
-      <input type="range" min="0" max="100" value="80" step="5" onchange="rangevalue.value=value" id="percentSlider"/>
-      <output id="rangevalue">80</output>% 1RM
-    </form>
-      <br>
-    <form class="Form">
-      <input type="text" id="oneRepMaxPercentLa"> = %1RM (Landers)
-      <br>
-      <input type="text" id="oneRepMaxPercentOc"> = %1RM (O'Connor)
-    </form>
+      <select name='Colors' id="colors">
+      <option value='1'>Yellow</option>
+      <option value='2'>Red</option>
+      <option value='3'>Green</option>
+      <option value='4'>Blue</option>
+      <option value='5'>Black</option>
+      <option value='6'>Silver</option>
+      <option value='7'>Gold</option>
+    </select>
+    <br>
+    <br>
+    <input type="number" id="restingLength" min="0" inputmode="numeric" pattern="[0-9]*" title="Non-negative integral number"> Resting Length (in)<br>
+    <input type="number" id="excursion" min="0" inputmode="numeric" pattern="[0-9]*" title="Non-negative integral number"> Excursion (in)<br>
+    <input type="number" id="reps" min="0" inputmode="numeric" pattern="[0-9]*" title="Non-negative integral number" value="1"> Repetitions<br>
+  </form>
+  <br>
+  <br>
+  <button id="calculate">Calculate</button>
+  <button id="Reset" class="green">Reset</button>
+  <br>
+  <br>
+  <form class="Form">
+    1RM = <input type="text" id="oneRepMaxLa"> (Landers)<br>
+    1RM = <input type="text" id="oneRepMaxOc"> (O'Connor)<br>
+  </form>
+  <br>
+  <br>
+  <form>
+    <input type="range" min="0" max="100" value="80" step="5" onchange="rangevalue.value=value" id="percentSlider"/>
+    <output id="rangevalue">80</output>% 1RM
+  </form>
+  <br>
+  <form class="Form">
+    <input type="text" id="oneRepMaxPercentLa"> = %1RM (Landers)
+    <br>
+    <input type="text" id="oneRepMaxPercentOc"> = %1RM (O'Connor)
+  </form>
 
     <!-- jquery script -->
   <script>
-  $("button#calculate").on("click", function () {
-  	var reps = $("input#reps").val();
-    var weight = $("input#weight").val();
-    $("input#oneRepMaxLa").val(Math.round(100 * weight / (101.3 - 2.67123 * reps)));
-    $("input#oneRepMaxOc").val(Math.round(weight * (1 + 0.025 * reps)));
-    var lander = $("input#oneRepMaxLa").val();
-    var oconnor = $("input#oneRepMaxOc").val();
-    var rangeVal = $("output#rangevalue").val();
-    $("input#oneRepMaxPercentLa").val(Math.round(lander * rangeVal / 100));
-    $("input#oneRepMaxPercentOc").val(Math.round(oconnor * rangeVal / 100));
-    $("input#percentSlider").on("change", function () {
-    	var rangeVal = $("output#rangevalue").val();
-    	$("input#oneRepMaxPercentLa").val(Math.round(lander * rangeVal / 100));
+    $("button#calculate").on("click", function() {
+      var color = $("#colors").val();
+      var reps = $("input#reps").val();
+      var excursion = $("input#excursion").val();
+      var restingLength = $("input#restingLength").val();
+      var deform = (excursion/restingLength);
+      var yellow = (0.788 + (0.0202 * deform * 100));
+      var red = (1.367 + (0.0229 * deform * 100));
+      var green = (1.525 + (0.0325 * deform * 100));
+      var blue = (2.323 + (0.0443 * deform * 100));
+      var black = (3.223 + (0.0587 * deform * 100));
+      var silver = (4.053 + (0.0856 * deform * 100));
+      var gold = (6.882 + (0.135 * deform * 100));
+      if (color == 1) {
+        $("input#oneRepMaxLa").val(Math.round(100 * yellow / (101.3 - 2.67123 * reps) * 10) / 10);
+        $("input#oneRepMaxOc").val(Math.round(yellow * (1 + 0.025 * reps) * 10) / 10);
+      } else if (color == 2) {
+        $("input#oneRepMaxLa").val(Math.round(100 * red / (101.3 - 2.67123 * reps) * 10) / 10);
+        $("input#oneRepMaxOc").val(Math.round(red * (1 + 0.025 * reps) * 10) / 10);
+      } else if (color == 3) {
+        $("input#oneRepMaxLa").val(Math.round(100 * green / (101.3 - 2.67123 * reps) * 10) / 10);
+        $("input#oneRepMaxOc").val(Math.round(green * (1 + 0.025 * reps) * 10) / 10);
+      } else if (color == 4) {
+        $("input#oneRepMaxLa").val(Math.round(100 * blue / (101.3 - 2.67123 * reps) * 10) / 10);
+        $("input#oneRepMaxOc").val(Math.round(blue * (1 + 0.025 * reps) * 10) / 10);
+      } else if (color == 5) {
+        $("input#oneRepMaxLa").val(Math.round(100 * black / (101.3 - 2.67123 * reps) * 10) / 10);
+        $("input#oneRepMaxOc").val(Math.round(black * (1 + 0.025 * reps) * 10) / 10);
+      } else if (color == 6) {
+        $("input#oneRepMaxLa").val(Math.round(100 * silver / (101.3 - 2.67123 * reps) * 10) / 10);
+        $("input#oneRepMaxOc").val(Math.round(silver * (1 + 0.025 * reps) * 10) / 10);
+      } else if (color == 7) {
+        $("input#oneRepMaxLa").val(Math.round(100 * gold / (101.3 - 2.67123 * reps) * 10) / 10);
+        $("input#oneRepMaxOc").val(Math.round(gold * (1 + 0.025 * reps) * 10) / 10);
+      }
+      var lander = $("input#oneRepMaxLa").val();
+      var oconnor = $("input#oneRepMaxOc").val();
+      var rangeVal = $("output#rangevalue").val();
+      $("input#oneRepMaxPercentLa").val(Math.round(lander * rangeVal / 100));
       $("input#oneRepMaxPercentOc").val(Math.round(oconnor * rangeVal / 100));
+      $("input#percentSlider").on("change", function() {
+      var rangeVal = $("output#rangevalue").val();
+      $("input#oneRepMaxPercentLa").val(Math.round(lander * rangeVal / 100));
+      $("input#oneRepMaxPercentOc").val(Math.round(oconnor * rangeVal / 100));
+      });
     });
-  });
-  $("button#Reset").on("click", function () {
-    $('.Form').trigger("reset");
-  });
+    $("button#Reset").on("click", function () {
+      $('.Form').trigger("reset");
+    });
   </script>
   </body>
 </html>
