@@ -123,3 +123,7 @@ select {
   -webkit-appearance: none;
   background-clip: padding-box;
 }
+
+select:focus {
+  font-size: 1.5em;
+}
