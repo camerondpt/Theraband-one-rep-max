@@ -107,3 +107,23 @@ button {
   width: 25%;
   background: #7CD05D;
 }
+
+select {
+  width: 75px;
+  border: none;
+  border-bottom: 1px solid black;
+  padding: 3px 10px;
+  font-size: 2.0em;
+  background-color: transparent;
+  -webkit-border: 0;
+  -webkit-box-shadow: none;
+  -webkit-appearance: none;
+  background-clip: padding-box;
+}
+#FFF658
+#5cb85c
+#FF5858
+#5064C7
+#404442
+#A6A6A6
+#FFCB58
