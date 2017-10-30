@@ -152,7 +152,9 @@
         singleBandShow(9.7,17.6,"#blackBandLa");
         singleBandShow(13.2,25.3,"#silverBandLa");
         singleBandShow(21.6,40.1,"#goldBandLa");
-
+        if (resistancePercentLa < 2.9 || 40.1 < resistancePercentLa) {
+          alert("Out of range")
+        }
 
 // ----------------------------------------------------------------
 // When the slider changes, everything here runs
@@ -195,6 +197,9 @@
         singleBandShow(9.7,17.6,"#blackBandLa");
         singleBandShow(13.2,25.3,"#silverBandLa");
         singleBandShow(21.6,40.1,"#goldBandLa");
+        if (resistancePercentLa2 < 2.9 || 40.1 < resistancePercentLa2) {
+          alert("Out of range")
+        }
 
 // Scroll to bottom
       	$("html, body").animate({ scrollTop: $(document).height() });
