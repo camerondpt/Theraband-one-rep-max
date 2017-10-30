@@ -43,25 +43,25 @@
     </form>
     <br>
     <br>
-    <form>
+    <form class="Form">
       <input type="range" min="0" max="100" value="80" step="5" onchange="rangevalue.value=value" id="percentSlider"/>
       <output id="rangevalue">80</output>% 1RM
     </form>
     <br>
     <form class="Form">
-      <input type="text" id="oneRepMaxPercentLa"> = %1RM (Landers)
-      <br>
-      <input type="text" id="oneRepMaxPercentOc"> = %1RM (O'Connor)
-      <br>
-      <br>
-      <div class="bandHide" id="yellowBandLa">Yellow band: <input type="text" id="yellowNewRestingLengthLa"> Resting Length (Landers)</div>
-      <div class="bandHide" id="redBandLa">Red band: <input type="text" id="redNewRestingLengthLa"> Resting Length (Landers)</div>
-      <div class="bandHide" id="greenBandLa">Green band: <input type="text" id="greenNewRestingLengthLa"> Resting Length (Landers)</div>
-      <div class="bandHide" id="blueBandLa">Blue band: <input type="text" id="blueNewRestingLengthLa"> Resting Length (Landers)</div>
-      <div class="bandHide" id="blackBandLa">Black band: <input type="text" id="blackNewRestingLengthLa"> Resting Length (Landers)</div>
-      <div class="bandHide" id="silverBandLa">Silver band: <input type="text" id="silverNewRestingLengthLa"> Resting Length (Landers)</div>
-      <div class="bandHide" id="goldBandLa">Gold band: <input type="text" id="goldNewRestingLengthLa"> Resting Length (Landers)</div>
-    </form>
+    <input type="text" id="oneRepMaxPercentLa"> = %1RM (Landers)
+    <br>
+    <input type="text" id="oneRepMaxPercentOc"> = %1RM (O'Connor)
+    <br>
+    <br>
+    <div class="bandHide" id="yellowBandLa">Yellow band: <input type="text" id="yellowNewRestingLengthLa"> Resting Length (Landers)</div>
+    <div class="bandHide" id="redBandLa">Red band: <input type="text" id="redNewRestingLengthLa"> Resting Length (Landers)</div>
+    <div class="bandHide" id="greenBandLa">Green band: <input type="text" id="greenNewRestingLengthLa"> Resting Length (Landers)</div>
+    <div class="bandHide" id="blueBandLa">Blue band: <input type="text" id="blueNewRestingLengthLa"> Resting Length (Landers)</div>
+    <div class="bandHide" id="blackBandLa">Black band: <input type="text" id="blackNewRestingLengthLa"> Resting Length (Landers)</div>
+    <div class="bandHide" id="silverBandLa">Silver band: <input type="text" id="silverNewRestingLengthLa"> Resting Length (Landers)</div>
+    <div class="bandHide" id="goldBandLa">Gold band: <input type="text" id="goldNewRestingLengthLa"> Resting Length (Landers)</div>
+  </form>
 
 <!-- Javascript / jquery -->
     <script>
@@ -74,16 +74,13 @@
       $("#silverBandLa").hide();
       $("#goldBandLa").hide();
       }
-
       $("button#calculate").on("click", function() {
         $('.Form').trigger("reset");
-        colorHide();
         var color = $("#colors").val();
         var reps = $("input#reps").val();
         var excursion = $("input#excursion").val();
         var restingLength = $("input#restingLength").val();
         var deform = (excursion/restingLength);
-
 // Regression Equations
         var yellow = (0.788 + (0.0202 * deform * 100));
         var red = (1.367 + (0.0229 * deform * 100));
@@ -97,14 +94,12 @@
         } else if (deform < 1) {
       	alert ("Reliability poor with less than 100% deformation")
         }
-
 // Figuring out which equation to use depending on the selected band color
         function colorInput(x) {
           $("input#resistance").val(Math.round(x *10) / 10);
           $("input#oneRepMaxLa").val(Math.round(10 * 100 * x / (101.3 - 2.67123 * reps)) / 10);
           $("input#oneRepMaxOc").val(Math.round(10 * x * (1 + 0.025 * reps)) / 10);
         }
-
         if (color == 1) {colorInput(yellow)}
         else if (color == 2) {colorInput(red)}
         else if (color == 3) {colorInput(green)}
@@ -112,7 +107,6 @@
         else if (color == 5) {colorInput(black)}
         else if (color == 6) {colorInput(silver)}
         else if (color == 7) {colorInput(gold)}
-
 // Variable declarations for the percent slider section
         var lander = $("input#oneRepMaxLa").val();
         var oconnor = $("input#oneRepMaxOc").val();
@@ -121,7 +115,6 @@
         var resistancePercentOc = oconnor*rangeVal / 100;
         $("input#oneRepMaxPercentLa").val(Math.round(10*resistancePercentLa)/10);
         $("input#oneRepMaxPercentOc").val(Math.round(10*resistancePercentOc)/10);
-
 // Function to define the new Resting lengths before slider change
         function restingLengthOP(){
           var yellowRL_La = Math.round(10*(excursion * 0.0202 / (0.01*(resistancePercentLa - 0.788))))/10;
@@ -131,7 +124,6 @@
           var blackRL_La = Math.round(10*(excursion * 0.0587 / (0.01*(resistancePercentLa - 3.223))))/10;
           var silverRL_La = Math.round(10*(excursion * 0.0856 / (0.01*(resistancePercentLa - 4.053))))/10;
           var goldRL_La = Math.round(10*(excursion * 0.1350 / (0.01*(resistancePercentLa - 6.882))))/10;
-
           $("input#yellowNewRestingLengthLa").val(yellowRL_La);
           $("input#redNewRestingLengthLa").val(redRL_La);
           $("input#greenNewRestingLengthLa").val(greenRL_La);
@@ -153,14 +145,11 @@
           singleBandShow(21.6,40.1,"#goldBandLa");
         }
         bandShow();
-
 // ----------------------------------------------------------------
 // When the slider changes, everything here runs
 // ----------------------------------------------------------------
-
         $("input#percentSlider").on("change", function() {
         colorHide();
-
 // Redefines the variables when the slider changes
         var rangeVal = $("output#rangevalue").val();
         var resistancePercentLa = Math.round(10*lander*rangeVal / 100)/10;
