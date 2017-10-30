@@ -165,6 +165,8 @@
 
 // Redefines the variables when the slider changes
         var rangeVal = $("output#rangevalue").val();
+        var lander = $("input#oneRepMaxLa").val();
+        var oconnor = $("input#oneRepMaxOc").val();
         var resistancePercentLa2 = Math.round(10*lander*rangeVal / 100)/10;
         var resistancePercentOc2 = Math.round(10*oconnor*rangeVal / 100)/10;
         $("input#oneRepMaxPercentLa").val(resistancePercentLa2);
