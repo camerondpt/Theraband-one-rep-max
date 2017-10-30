@@ -9,6 +9,11 @@ html {
   font-size: 1.5em;
 }
 
+hr {
+  width: 70%;
+  height: 1px;
+}
+
 input {
   text-align: center;
 }
