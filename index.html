@@ -61,18 +61,17 @@
 
 <!-- Javascript / jquery -->
     <script>
-      function colorHide() {
-        $("#yellowBandLa").hide();
-        $("#redBandLa").hide();
-        $("#greenBandLa").hide();
-        $("#blueBandLa").hide();
-        $("#blackBandLa").hide();
-        $("#silverBandLa").hide();
-        $("#goldBandLa").hide();
-      }
-      colorHide();
       $("button#calculate").on("click", function() {
         $('.Form').trigger("reset");
+        function colorHide() {
+          $("#yellowBandLa").hide();
+          $("#redBandLa").hide();
+          $("#greenBandLa").hide();
+          $("#blueBandLa").hide();
+          $("#blackBandLa").hide();
+          $("#silverBandLa").hide();
+          $("#goldBandLa").hide();
+        }
         colorHide();
         var color = $("#colors").val();
         var reps = $("input#reps").val();
