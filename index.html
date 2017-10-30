@@ -128,8 +128,7 @@
         var silverRL_La = Math.round(10*(excursion * 0.0856 / (0.01*(resistancePercentLa - 4.053))))/10;
         var goldRL_La = Math.round(10*(excursion * 0.1350 / (0.01*(resistancePercentLa - 6.882))))/10;
 
-// Function for resting length output
-        function restingLengthOP() {
+// Resting length output
           $("input#yellowNewRestingLengthLa").val(yellowRL_La);
           $("input#redNewRestingLengthLa").val(redRL_La);
           $("input#greenNewRestingLengthLa").val(greenRL_La);
@@ -137,8 +136,7 @@
           $("input#blackNewRestingLengthLa").val(blackRL_La);
           $("input#silverNewRestingLengthLa").val(silverRL_La);
           $("input#goldNewRestingLengthLa").val(goldRL_La);
-        }
-        restingLengthOP();
+
 
 // Shows only the bands in the correct ranges
 
@@ -178,7 +176,13 @@
         var blackRL_La = Math.round(10*(excursion * 0.0587 / (0.01*(resistancePercentLa2 - 3.223))))/10;
         var silverRL_La = Math.round(10*(excursion * 0.0856 / (0.01*(resistancePercentLa2 - 4.053))))/10;
         var goldRL_La = Math.round(10*(excursion * 0.1350 / (0.01*(resistancePercentLa2 - 6.882))))/10;
-        restingLengthOP();
+        $("input#yellowNewRestingLengthLa").val(yellowRL_La);
+        $("input#redNewRestingLengthLa").val(redRL_La);
+        $("input#greenNewRestingLengthLa").val(greenRL_La);
+        $("input#blueNewRestingLengthLa").val(blueRL_La);
+        $("input#blackNewRestingLengthLa").val(blackRL_La);
+        $("input#silverNewRestingLengthLa").val(silverRL_La);
+        $("input#goldNewRestingLengthLa").val(goldRL_La);
         function singleBandShow(x,y,z) {
           if (x <= resistancePercentLa2 && resistancePercentLa2 <= y) {
             $(z).show();
