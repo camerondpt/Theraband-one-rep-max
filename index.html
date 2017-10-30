@@ -165,20 +165,20 @@
 
 // Redefines the variables when the slider changes
         var rangeVal = $("output#rangevalue").val();
-        var resistancePercentLa = Math.round(10*lander*rangeVal / 100)/10;
-        var resistancePercentOc = Math.round(10*oconnor*rangeVal / 100)/10;
-        $("input#oneRepMaxPercentLa").val(resistancePercentLa);
-        $("input#oneRepMaxPercentOc").val(resistancePercentOc);
-        var yellowRL_La = Math.round(10*(excursion * 0.0202 / (0.01*(resistancePercentLa - 0.788))))/10;
-        var redRL_La = Math.round(10*(excursion * 0.0229 / (0.01*(resistancePercentLa - 1.367))))/10;
-        var greenRL_La = Math.round(10*(excursion * 0.0325 / (0.01*(resistancePercentLa - 1.525))))/10;
-        var blueRL_La = Math.round(10*(excursion * 0.0443 / (0.01*(resistancePercentLa - 2.323))))/10;
-        var blackRL_La = Math.round(10*(excursion * 0.0587 / (0.01*(resistancePercentLa - 3.223))))/10;
-        var silverRL_La = Math.round(10*(excursion * 0.0856 / (0.01*(resistancePercentLa - 4.053))))/10;
-        var goldRL_La = Math.round(10*(excursion * 0.1350 / (0.01*(resistancePercentLa - 6.882))))/10;
+        var resistancePercentLa2 = Math.round(10*lander*rangeVal / 100)/10;
+        var resistancePercentOc2 = Math.round(10*oconnor*rangeVal / 100)/10;
+        $("input#oneRepMaxPercentLa").val(resistancePercentLa2);
+        $("input#oneRepMaxPercentOc").val(resistancePercentOc2);
+        var yellowRL_La = Math.round(10*(excursion * 0.0202 / (0.01*(resistancePercentLa2 - 0.788))))/10;
+        var redRL_La = Math.round(10*(excursion * 0.0229 / (0.01*(resistancePercentLa2 - 1.367))))/10;
+        var greenRL_La = Math.round(10*(excursion * 0.0325 / (0.01*(resistancePercentLa2 - 1.525))))/10;
+        var blueRL_La = Math.round(10*(excursion * 0.0443 / (0.01*(resistancePercentLa2 - 2.323))))/10;
+        var blackRL_La = Math.round(10*(excursion * 0.0587 / (0.01*(resistancePercentLa2 - 3.223))))/10;
+        var silverRL_La = Math.round(10*(excursion * 0.0856 / (0.01*(resistancePercentLa2 - 4.053))))/10;
+        var goldRL_La = Math.round(10*(excursion * 0.1350 / (0.01*(resistancePercentLa2 - 6.882))))/10;
         restingLengthOP();
         function singleBandShow(x,y,z) {
-          if (x <= resistancePercentLa && resistancePercentLa <= y) {
+          if (x <= resistancePercentLa2 && resistancePercentLa2 <= y) {
             $(z).show();
           };
         }
