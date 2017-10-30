@@ -198,6 +198,9 @@
 
 // Scroll to bottom
       	$("html, body").animate({ scrollTop: $(document).height() });
+        $(window).bind("mousewheel", function() {
+          $("html, body").stop(true, false);
+        });
         }); // Finish of Slider change function
       }); // Finish of calculate button function
       $("button#Reset").on("click", function () {
