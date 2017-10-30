@@ -43,25 +43,25 @@
     </form>
     <br>
     <br>
-    <form class="Form">
+    <form>
       <input type="range" min="0" max="100" value="80" step="5" onchange="rangevalue.value=value" id="percentSlider"/>
       <output id="rangevalue">80</output>% 1RM
     </form>
     <br>
     <form class="Form">
-    <input type="text" id="oneRepMaxPercentLa"> = %1RM (Landers)
-    <br>
-    <input type="text" id="oneRepMaxPercentOc"> = %1RM (O'Connor)
-    <br>
-    <br>
-    <div class="bandHide" id="yellowBandLa">Yellow band: <input type="text" id="yellowNewRestingLengthLa"> Resting Length (Landers)</div>
-    <div class="bandHide" id="redBandLa">Red band: <input type="text" id="redNewRestingLengthLa"> Resting Length (Landers)</div>
-    <div class="bandHide" id="greenBandLa">Green band: <input type="text" id="greenNewRestingLengthLa"> Resting Length (Landers)</div>
-    <div class="bandHide" id="blueBandLa">Blue band: <input type="text" id="blueNewRestingLengthLa"> Resting Length (Landers)</div>
-    <div class="bandHide" id="blackBandLa">Black band: <input type="text" id="blackNewRestingLengthLa"> Resting Length (Landers)</div>
-    <div class="bandHide" id="silverBandLa">Silver band: <input type="text" id="silverNewRestingLengthLa"> Resting Length (Landers)</div>
-    <div class="bandHide" id="goldBandLa">Gold band: <input type="text" id="goldNewRestingLengthLa"> Resting Length (Landers)</div>
-  </form>
+      <input type="text" id="oneRepMaxPercentLa"> = %1RM (Landers)
+      <br>
+      <input type="text" id="oneRepMaxPercentOc"> = %1RM (O'Connor)
+      <br>
+      <br>
+      <div class="bandHide" id="yellowBandLa">Yellow band: <input type="text" id="yellowNewRestingLengthLa"> Resting Length (Landers)</div>
+      <div class="bandHide" id="redBandLa">Red band: <input type="text" id="redNewRestingLengthLa"> Resting Length (Landers)</div>
+      <div class="bandHide" id="greenBandLa">Green band: <input type="text" id="greenNewRestingLengthLa"> Resting Length (Landers)</div>
+      <div class="bandHide" id="blueBandLa">Blue band: <input type="text" id="blueNewRestingLengthLa"> Resting Length (Landers)</div>
+      <div class="bandHide" id="blackBandLa">Black band: <input type="text" id="blackNewRestingLengthLa"> Resting Length (Landers)</div>
+      <div class="bandHide" id="silverBandLa">Silver band: <input type="text" id="silverNewRestingLengthLa"> Resting Length (Landers)</div>
+      <div class="bandHide" id="goldBandLa">Gold band: <input type="text" id="goldNewRestingLengthLa"> Resting Length (Landers)</div>
+    </form>
 
 <!-- Javascript / jquery -->
     <script>
@@ -77,6 +77,7 @@
 
       $("button#calculate").on("click", function() {
         $('.Form').trigger("reset");
+        colorHide();
         var color = $("#colors").val();
         var reps = $("input#reps").val();
         var excursion = $("input#excursion").val();
