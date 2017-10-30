@@ -195,6 +195,9 @@
         singleBandShow(9.7,17.6,"#blackBandLa");
         singleBandShow(13.2,25.3,"#silverBandLa");
         singleBandShow(21.6,40.1,"#goldBandLa");
+
+// Scroll to bottom
+      	$("html, body").animate({ scrollTop: $(document).height() });
         }); // Finish of Slider change function
       }); // Finish of calculate button function
       $("button#Reset").on("click", function () {
