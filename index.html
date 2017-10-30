@@ -6,10 +6,6 @@
     <meta name="mobile-web-app-capable" content="yes">
     <!--Style Sheet for the index.html page -->
     <link href="stylesheet.css" rel="stylesheet" type="text/css" />
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
     <!-- jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       <title>Theraband One Rep Max Calculator</title>
@@ -43,7 +39,7 @@
     </form>
     <br>
     <br>
-    <form>
+    <form class="Form">
       <input type="range" min="0" max="100" value="80" step="5" onchange="rangevalue.value=value" id="percentSlider"/>
       <output id="rangevalue">80</output>% 1RM
     </form>
@@ -65,16 +61,16 @@
 
 <!-- Javascript / jquery -->
     <script>
-    function colorHide() {
-      $("#yellowBandLa").hide();
-      $("#redBandLa").hide();
-      $("#greenBandLa").hide();
-      $("#blueBandLa").hide();
-      $("#blackBandLa").hide();
-      $("#silverBandLa").hide();
-      $("#goldBandLa").hide();
+      function colorHide() {
+        $("#yellowBandLa").hide();
+        $("#redBandLa").hide();
+        $("#greenBandLa").hide();
+        $("#blueBandLa").hide();
+        $("#blackBandLa").hide();
+        $("#silverBandLa").hide();
+        $("#goldBandLa").hide();
       }
-
+      colorHide();
       $("button#calculate").on("click", function() {
         $('.Form').trigger("reset");
         colorHide();
@@ -122,16 +118,17 @@
         $("input#oneRepMaxPercentLa").val(Math.round(10*resistancePercentLa)/10);
         $("input#oneRepMaxPercentOc").val(Math.round(10*resistancePercentOc)/10);
 
-// Function to define the new Resting lengths before slider change
-        function restingLengthOP(){
-          var yellowRL_La = Math.round(10*(excursion * 0.0202 / (0.01*(resistancePercentLa - 0.788))))/10;
-          var redRL_La = Math.round(10*(excursion * 0.0229 / (0.01*(resistancePercentLa - 1.367))))/10;
-          var greenRL_La = Math.round(10*(excursion * 0.0325 / (0.01*(resistancePercentLa - 1.525))))/10;
-          var blueRL_La = Math.round(10*(excursion * 0.0443 / (0.01*(resistancePercentLa - 2.323))))/10;
-          var blackRL_La = Math.round(10*(excursion * 0.0587 / (0.01*(resistancePercentLa - 3.223))))/10;
-          var silverRL_La = Math.round(10*(excursion * 0.0856 / (0.01*(resistancePercentLa - 4.053))))/10;
-          var goldRL_La = Math.round(10*(excursion * 0.1350 / (0.01*(resistancePercentLa - 6.882))))/10;
+// Variables before slider change
+        var yellowRL_La = Math.round(10*(excursion * 0.0202 / (0.01*(resistancePercentLa - 0.788))))/10;
+        var redRL_La = Math.round(10*(excursion * 0.0229 / (0.01*(resistancePercentLa - 1.367))))/10;
+        var greenRL_La = Math.round(10*(excursion * 0.0325 / (0.01*(resistancePercentLa - 1.525))))/10;
+        var blueRL_La = Math.round(10*(excursion * 0.0443 / (0.01*(resistancePercentLa - 2.323))))/10;
+        var blackRL_La = Math.round(10*(excursion * 0.0587 / (0.01*(resistancePercentLa - 3.223))))/10;
+        var silverRL_La = Math.round(10*(excursion * 0.0856 / (0.01*(resistancePercentLa - 4.053))))/10;
+        var goldRL_La = Math.round(10*(excursion * 0.1350 / (0.01*(resistancePercentLa - 6.882))))/10;
 
+// Function for resting length output
+        function restingLengthOP() {
           $("input#yellowNewRestingLengthLa").val(yellowRL_La);
           $("input#redNewRestingLengthLa").val(redRL_La);
           $("input#greenNewRestingLengthLa").val(greenRL_La);
@@ -141,18 +138,22 @@
           $("input#goldNewRestingLengthLa").val(goldRL_La);
         }
         restingLengthOP();
+
 // Shows only the bands in the correct ranges
-        function singleBandShow(x,y,z,a) {if (x <= resistancePercentLa && resistancePercentLa <= y) {$(z).show();};}
-        function bandShow() {
-          singleBandShow(2.9,5.8,"#yellowBandLa");
-          singleBandShow(3.9,7.0,"#redBandLa");
-          singleBandShow(5.0,9.6,"#greenBandLa");
-          singleBandShow(7.1,13.3,"#blueBandLa");
-          singleBandShow(9.7,17.6,"#blackBandLa");
-          singleBandShow(13.2,25.3,"#silverBandLa");
-          singleBandShow(21.6,40.1,"#goldBandLa");
+
+        function singleBandShow(x,y,z) {
+          if (x <= resistancePercentLa && resistancePercentLa <= y) {
+            $(z).show();
+          };
         }
-        bandShow();
+        singleBandShow(2.9,5.8,"#yellowBandLa");
+        singleBandShow(3.9,7.0,"#redBandLa");
+        singleBandShow(5.0,9.6,"#greenBandLa");
+        singleBandShow(7.1,13.3,"#blueBandLa");
+        singleBandShow(9.7,17.6,"#blackBandLa");
+        singleBandShow(13.2,25.3,"#silverBandLa");
+        singleBandShow(21.6,40.1,"#goldBandLa");
+
 
 // ----------------------------------------------------------------
 // When the slider changes, everything here runs
@@ -167,9 +168,27 @@
         var resistancePercentOc = Math.round(10*oconnor*rangeVal / 100)/10;
         $("input#oneRepMaxPercentLa").val(resistancePercentLa);
         $("input#oneRepMaxPercentOc").val(resistancePercentOc);
+        var yellowRL_La = Math.round(10*(excursion * 0.0202 / (0.01*(resistancePercentLa - 0.788))))/10;
+        var redRL_La = Math.round(10*(excursion * 0.0229 / (0.01*(resistancePercentLa - 1.367))))/10;
+        var greenRL_La = Math.round(10*(excursion * 0.0325 / (0.01*(resistancePercentLa - 1.525))))/10;
+        var blueRL_La = Math.round(10*(excursion * 0.0443 / (0.01*(resistancePercentLa - 2.323))))/10;
+        var blackRL_La = Math.round(10*(excursion * 0.0587 / (0.01*(resistancePercentLa - 3.223))))/10;
+        var silverRL_La = Math.round(10*(excursion * 0.0856 / (0.01*(resistancePercentLa - 4.053))))/10;
+        var goldRL_La = Math.round(10*(excursion * 0.1350 / (0.01*(resistancePercentLa - 6.882))))/10;
         restingLengthOP();
-        bandShow();
-        }); // Finish of slider change function
+        function singleBandShow(x,y,z) {
+          if (x <= resistancePercentLa && resistancePercentLa <= y) {
+            $(z).show();
+          };
+        }
+        singleBandShow(2.9,5.8,"#yellowBandLa");
+        singleBandShow(3.9,7.0,"#redBandLa");
+        singleBandShow(5.0,9.6,"#greenBandLa");
+        singleBandShow(7.1,13.3,"#blueBandLa");
+        singleBandShow(9.7,17.6,"#blackBandLa");
+        singleBandShow(13.2,25.3,"#silverBandLa");
+        singleBandShow(21.6,40.1,"#goldBandLa");
+        });
       }); // Finish of calculate button function
       $("button#Reset").on("click", function () {
         $('.Form').trigger("reset");
