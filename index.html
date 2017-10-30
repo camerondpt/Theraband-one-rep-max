@@ -15,108 +15,166 @@
       <title>Theraband One Rep Max Calculator</title>
   </head>
   <body>
-    <form method="post" class="Form">
+    <form method="post" class="TopForm">
       <select name='Colors' id="colors">
-      <option value='1'>Yellow</option>
-      <option value='2'>Red</option>
-      <option value='3'>Green</option>
-      <option value='4'>Blue</option>
-      <option value='5'>Black</option>
-      <option value='6'>Silver</option>
-      <option value='7'>Gold</option>
-    </select>
+        <option value='1'>Yellow</option>
+        <option value='2'>Red</option>
+        <option value='3'>Green</option>
+        <option value='4'>Blue</option>
+        <option value='5'>Black</option>
+        <option value='6'>Silver</option>
+        <option value='7'>Gold</option>
+      </select>
       <br>
-    <input type="number" id="restingLength" min="0" inputmode="numeric" pattern="[0-9]*" title="Non-negative integral number"> Resting Length (in)<br>
-    <input type="number" id="excursion" min="0" inputmode="numeric" pattern="[0-9]*" title="Non-negative integral number"> Excursion (in)<br>
-    <input type="number" id="reps" min="0" inputmode="numeric" pattern="[0-9]*" title="Non-negative integral number" value="1"> Repetitions<br>
-  </form>
+      <input type="number" id="restingLength" min="0" inputmode="numeric" pattern="[0-9]*" title="Non-negative integral number"> Resting Length (in)<br>
+      <input type="number" id="excursion" min="0" inputmode="numeric" pattern="[0-9]*" title="Non-negative integral number"> Excursion (in)<br>
+      <input type="number" id="reps" min="0" inputmode="numeric" pattern="[0-9]*" title="Non-negative integral number" value="1"> Repetitions<br>
+    </form>
     <br>
     <br>
-  <button id="calculate">Calculate</button>
-  <button id="Reset" class="green">Reset</button>
+    <button id="calculate">Calculate</button>
+    <button id="Reset" class="green">Reset</button>
     <br>
     <br>
-  <form class="Form">
-    Force = <input type="text" id="force"> pounds<br>
-    Est. 1RM = <input type="text" id="oneRepMaxLa"> (Landers)<br>
-    Est. 1RM = <input type="text" id="oneRepMaxOc"> (O'Connor)<br>
-  </form>
+    <form class="Form">
+      Resistance = <input type="text" id="resistance"> pounds<br>
+      Est. 1RM = <input type="text" id="oneRepMaxLa"> (Landers)<br>
+      Est. 1RM = <input type="text" id="oneRepMaxOc"> (O'Connor)<br>
+    </form>
     <br>
     <br>
-  <form>
-    <input type="range" min="0" max="100" value="80" step="5" onchange="rangevalue.value=value" id="percentSlider"/>
-    <output id="rangevalue">80</output>% 1RM
-  </form>
+    <form class="Form">
+      <input type="range" min="0" max="100" value="80" step="5" onchange="rangevalue.value=value" id="percentSlider"/>
+      <output id="rangevalue">80</output>% 1RM
+    </form>
     <br>
-  <form class="Form">
+    <form class="Form">
     <input type="text" id="oneRepMaxPercentLa"> = %1RM (Landers)
-      <br>
+    <br>
     <input type="text" id="oneRepMaxPercentOc"> = %1RM (O'Connor)
+    <br>
+    <br>
+    <div class="bandHide" id="yellowBandLa">Yellow band: <input type="text" id="yellowNewRestingLengthLa"> Resting Length (Landers)</div>
+    <div class="bandHide" id="redBandLa">Red band: <input type="text" id="redNewRestingLengthLa"> Resting Length (Landers)</div>
+    <div class="bandHide" id="greenBandLa">Green band: <input type="text" id="greenNewRestingLengthLa"> Resting Length (Landers)</div>
+    <div class="bandHide" id="blueBandLa">Blue band: <input type="text" id="blueNewRestingLengthLa"> Resting Length (Landers)</div>
+    <div class="bandHide" id="blackBandLa">Black band: <input type="text" id="blackNewRestingLengthLa"> Resting Length (Landers)</div>
+    <div class="bandHide" id="silverBandLa">Silver band: <input type="text" id="silverNewRestingLengthLa"> Resting Length (Landers)</div>
+    <div class="bandHide" id="goldBandLa">Gold band: <input type="text" id="goldNewRestingLengthLa"> Resting Length (Landers)</div>
   </form>
 
-    <!-- jquery script -->
-  <script>
-    $("button#calculate").on("click", function() {
-      var color = $("#colors").val();
-      var reps = $("input#reps").val();
-      var excursion = $("input#excursion").val();
-      var restingLength = $("input#restingLength").val();
-      var deform = (excursion/restingLength);
-      var yellow = (0.788 + (0.0202 * deform * 100));
-      var red = (1.367 + (0.0229 * deform * 100));
-      var green = (1.525 + (0.0325 * deform * 100));
-      var blue = (2.323 + (0.0443 * deform * 100));
-      var black = (3.223 + (0.0587 * deform * 100));
-      var silver = (4.053 + (0.0856 * deform * 100));
-      var gold = (6.882 + (0.135 * deform * 100));
-      if (deform > 2.5) {
-    	alert("Calculations invalid over 250% deformation")
-      } else if (deform < 1) {
-    	alert ("Reliability poor with less than 100% deformation")
+<!-- Javascript / jquery -->
+    <script>
+    function colorHide() {
+      $("#yellowBandLa").hide();
+      $("#redBandLa").hide();
+      $("#greenBandLa").hide();
+      $("#blueBandLa").hide();
+      $("#blackBandLa").hide();
+      $("#silverBandLa").hide();
+      $("#goldBandLa").hide();
       }
-      if (color == 1) {
-        $("input#force").val(Math.round(yellow*10) / 10);
-        $("input#oneRepMaxLa").val(Math.round(100 * yellow / (101.3 - 2.67123 * reps)));
-        $("input#oneRepMaxOc").val(Math.round(yellow * (1 + 0.025 * reps)));
-      } else if (color == 2) {
-        $("input#force").val(Math.round(red*10) / 10);
-        $("input#oneRepMaxLa").val(Math.round(100 * red / (101.3 - 2.67123 * reps)));
-        $("input#oneRepMaxOc").val(Math.round(red * (1 + 0.025 * reps)));
-      } else if (color == 3) {
-        $("input#force").val(Math.round(green*10) / 10);
-        $("input#oneRepMaxLa").val(Math.round(100 * green / (101.3 - 2.67123 * reps)));
-        $("input#oneRepMaxOc").val(Math.round(green * (1 + 0.025 * reps)));
-      } else if (color == 4) {
-        $("input#force").val(Math.round(blue*10) / 10);
-        $("input#oneRepMaxLa").val(Math.round(100 * blue / (101.3 - 2.67123 * reps)));
-        $("input#oneRepMaxOc").val(Math.round(blue * (1 + 0.025 * reps)));
-      } else if (color == 5) {
-        $("input#force").val(Math.round(black*10) / 10);
-        $("input#oneRepMaxLa").val(Math.round(100 * black / (101.3 - 2.67123 * reps)));
-        $("input#oneRepMaxOc").val(Math.round(black * (1 + 0.025 * reps)));
-      } else if (color == 6) {
-        $("input#force").val(Math.round(silver*10) / 10);
-        $("input#oneRepMaxLa").val(Math.round(100 * silver / (101.3 - 2.67123 * reps)));
-        $("input#oneRepMaxOc").val(Math.round(silver * (1 + 0.025 * reps)));
-      } else if (color == 7) {
-        $("input#force").val(Math.round(gold*10) / 10);
-        $("input#oneRepMaxLa").val(Math.round(100 * gold / (101.3 - 2.67123 * reps)));
-        $("input#oneRepMaxOc").val(Math.round(gold * (1 + 0.025 * reps)));
-      }
-      var lander = $("input#oneRepMaxLa").val();
-      var oconnor = $("input#oneRepMaxOc").val();
-      var rangeVal = $("output#rangevalue").val();
-      $("input#oneRepMaxPercentLa").val(Math.round(lander * rangeVal / 100));
-      $("input#oneRepMaxPercentOc").val(Math.round(oconnor * rangeVal / 100));
-      $("input#percentSlider").on("change", function() {
-      var rangeVal = $("output#rangevalue").val();
-      $("input#oneRepMaxPercentLa").val(Math.round(lander * rangeVal / 100));
-      $("input#oneRepMaxPercentOc").val(Math.round(oconnor * rangeVal / 100));
+
+      $("button#calculate").on("click", function() {
+        $('.Form').trigger("reset");
+        var color = $("#colors").val();
+        var reps = $("input#reps").val();
+        var excursion = $("input#excursion").val();
+        var restingLength = $("input#restingLength").val();
+        var deform = (excursion/restingLength);
+
+// Regression Equations
+        var yellow = (0.788 + (0.0202 * deform * 100));
+        var red = (1.367 + (0.0229 * deform * 100));
+        var green = (1.525 + (0.0325 * deform * 100));
+        var blue = (2.323 + (0.0443 * deform * 100));
+        var black = (3.223 + (0.0587 * deform * 100));
+        var silver = (4.053 + (0.0856 * deform * 100));
+        var gold = (6.882 + (0.1350 * deform * 100));
+        if (deform > 2.5) {
+      	alert("Calculations untested over 250% deformation")
+        } else if (deform < 1) {
+      	alert ("Reliability poor with less than 100% deformation")
+        }
+
+// Figuring out which equation to use depending on the selected band color
+        function colorInput(x) {
+          $("input#resistance").val(Math.round(x *10) / 10);
+          $("input#oneRepMaxLa").val(Math.round(10 * 100 * x / (101.3 - 2.67123 * reps)) / 10);
+          $("input#oneRepMaxOc").val(Math.round(10 * x * (1 + 0.025 * reps)) / 10);
+        }
+
+        if (color == 1) {colorInput(yellow)}
+        else if (color == 2) {colorInput(red)}
+        else if (color == 3) {colorInput(green)}
+        else if (color == 4) {colorInput(blue)}
+        else if (color == 5) {colorInput(black)}
+        else if (color == 6) {colorInput(silver)}
+        else if (color == 7) {colorInput(gold)}
+
+// Variable declarations for the percent slider section
+        var lander = $("input#oneRepMaxLa").val();
+        var oconnor = $("input#oneRepMaxOc").val();
+        var rangeVal = $("output#rangevalue").val();
+        var resistancePercentLa = lander*rangeVal / 100;
+        var resistancePercentOc = oconnor*rangeVal / 100;
+        $("input#oneRepMaxPercentLa").val(Math.round(10*resistancePercentLa)/10);
+        $("input#oneRepMaxPercentOc").val(Math.round(10*resistancePercentOc)/10);
+
+// Function to define the new Resting lengths before slider change
+        function restingLengthOP(){
+          var yellowRL_La = Math.round(10*(excursion * 0.0202 / (0.01*(resistancePercentLa - 0.788))))/10;
+          var redRL_La = Math.round(10*(excursion * 0.0229 / (0.01*(resistancePercentLa - 1.367))))/10;
+          var greenRL_La = Math.round(10*(excursion * 0.0325 / (0.01*(resistancePercentLa - 1.525))))/10;
+          var blueRL_La = Math.round(10*(excursion * 0.0443 / (0.01*(resistancePercentLa - 2.323))))/10;
+          var blackRL_La = Math.round(10*(excursion * 0.0587 / (0.01*(resistancePercentLa - 3.223))))/10;
+          var silverRL_La = Math.round(10*(excursion * 0.0856 / (0.01*(resistancePercentLa - 4.053))))/10;
+          var goldRL_La = Math.round(10*(excursion * 0.1350 / (0.01*(resistancePercentLa - 6.882))))/10;
+
+          $("input#yellowNewRestingLengthLa").val(yellowRL_La);
+          $("input#redNewRestingLengthLa").val(redRL_La);
+          $("input#greenNewRestingLengthLa").val(greenRL_La);
+          $("input#blueNewRestingLengthLa").val(blueRL_La);
+          $("input#blackNewRestingLengthLa").val(blackRL_La);
+          $("input#silverNewRestingLengthLa").val(silverRL_La);
+          $("input#goldNewRestingLengthLa").val(goldRL_La);
+        }
+        restingLengthOP();
+// Shows only the bands in the correct ranges
+        function singleBandShow(x,y,z,a) {if (x <= resistancePercentLa && resistancePercentLa <= y) {$(z).show();};}
+        function bandShow() {
+          singleBandShow(2.9,5.8,"#yellowBandLa");
+          singleBandShow(3.9,7.0,"#redBandLa");
+          singleBandShow(5.0,9.6,"#greenBandLa");
+          singleBandShow(7.1,13.3,"#blueBandLa");
+          singleBandShow(9.7,17.6,"#blackBandLa");
+          singleBandShow(13.2,25.3,"#silverBandLa");
+          singleBandShow(21.6,40.1,"#goldBandLa");
+        }
+        bandShow();
+
+// ----------------------------------------------------------------
+// When the slider changes, everything here runs
+// ----------------------------------------------------------------
+
+        $("input#percentSlider").on("change", function() {
+        colorHide();
+
+// Redefines the variables when the slider changes
+        var rangeVal = $("output#rangevalue").val();
+        var resistancePercentLa = Math.round(10*lander*rangeVal / 100)/10;
+        var resistancePercentOc = Math.round(10*oconnor*rangeVal / 100)/10;
+        $("input#oneRepMaxPercentLa").val(resistancePercentLa);
+        $("input#oneRepMaxPercentOc").val(resistancePercentOc);
+        restingLengthOP();
+        bandShow();
+        }); // Finish of slider change function
+      }); // Finish of calculate button function
+      $("button#Reset").on("click", function () {
+        $('.Form').trigger("reset");
+        $('.TopForm').trigger("reset");
+        colorHide();
       });
-    });
-    $("button#Reset").on("click", function () {
-      $('.Form').trigger("reset");
-    });
-  </script>
+    </script>
   </body>
 </html>

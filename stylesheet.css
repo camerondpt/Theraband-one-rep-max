@@ -32,7 +32,7 @@ input[type=text]:focus {
 }
 
 input[type="number"] {
-  width: 75px;
+  width: 90px;
   border: none;
   border-bottom: 1px solid black;
   padding: 3px 10px;
@@ -126,4 +126,8 @@ select {
 
 select:focus {
   font-size: 1.5em;
+}
+
+.bandHide {
+  display: none;
 }
